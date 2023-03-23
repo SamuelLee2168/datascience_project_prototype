@@ -3,6 +3,8 @@ import numpy as np
 import streamlit as st
 import datetime
 
+st.title("股票强势系数分析-V1")
+
 basic_stock_data = pd.read_csv("data/basic_stock_data.csv")
 
 def find_stock_name_given_code(ts_code,basic_stock_data):
