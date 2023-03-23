@@ -126,7 +126,15 @@ end_time = int(st.text_input("强势系数结束计算的时间",value="20230323
 ranking_functions = {"强势系数1":calculate_stock_rating_1_for_stock,"强势系数2":calculate_stock_rating_2_for_stock,"强势系数3":calculate_stock_rating_3_for_stock,"强势系数5":calculate_stock_rating_5_for_stock}
 function_to_sort_by = "强势系数1"
 df_to_display, stocks_out_of_time_range = rank_stocks_by_rating_function(ts_codes,start_time,end_time,ranking_functions,function_to_sort_by,basic_stock_data)
-st.dataframe(df_to_display)
+st.markdown("以强势系数1排序的结果：")
+st.dataframe(df_to_display.sort_values("强势系数1",ascending=False))
+st.markdown("以强势系数2排序的结果：")
+st.dataframe(df_to_display.sort_values("强势系数2",ascending=False))
+st.markdown("以强势系数3排序的结果：")
+st.dataframe(df_to_display.sort_values("强势系数3",ascending=False))
+st.markdown("以强势系数5排序的结果：")
+st.dataframe(df_to_display.sort_values("强势系数5",ascending=False))
+
 if len(stocks_out_of_time_range)>0:
     st.markdown("以下股票因在输入的时间段内缺乏数据，所以没有被放入强势系数的比较中:")
     st.markdown(stocks_out_of_time_range)
