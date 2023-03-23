@@ -128,5 +128,5 @@ function_to_sort_by = "强势系数1"
 df_to_display, stocks_out_of_time_range = rank_stocks_by_rating_function(ts_codes,start_time,end_time,ranking_functions,function_to_sort_by,basic_stock_data)
 st.dataframe(df_to_display)
 if len(stocks_out_of_time_range)>0:
-    st.markdown("以下股票因时间段不符从而没有被放入强势系数的比较中:")
+    st.markdown("以下股票因在输入的时间段内缺乏数据，所以没有被放入强势系数的比较中:")
     st.markdown(stocks_out_of_time_range)
