@@ -121,7 +121,7 @@ def rank_stocks_by_rating_function(stock_code_or_names,time_start,time_end,ranki
     return rankings_df, stocks_out_of_time_range
 
 ts_codes = st.text_input("以下可输入想要排序的股票名字或者股票代码。注意多个股票之间要用英文逗号分割。",value="平安银行,873223.BJ,万科A,000006.SZ").split(",")
-start_time = int(st.text_input("以下输入开始计算强势系数的时间",value="20220915"))
+start_time = int(st.text_input("以下输入开始计算强势系数的时间。格式是YYYYMMDD",value="20220915"))
 end_time = int(st.text_input("以下输入停止计算强势系数的时间",value="20230323"))
 ranking_functions = {"强势系数1":calculate_stock_rating_1_for_stock,"强势系数2":calculate_stock_rating_2_for_stock,"强势系数3":calculate_stock_rating_3_for_stock,"强势系数5":calculate_stock_rating_5_for_stock}
 function_to_sort_by = "强势系数1"
