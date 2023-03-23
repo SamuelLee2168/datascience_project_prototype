@@ -1,5 +1,3 @@
-import tushare as ts
-import plotly_express as px
 import pandas as pd
 import numpy as np
 import streamlit as st
