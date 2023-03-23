@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import datetime
-pro = ts.pro_api('6a180387b6b81a6226a45be784d0162d4676af26348e285396a50f78')
 
 basic_stock_data = pd.read_csv("data/basic_stock_data.csv")
 
