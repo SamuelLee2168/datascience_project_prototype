@@ -126,14 +126,38 @@ end_time = int(st.text_input("强势系数结束计算的时间",value="20230323
 ranking_functions = {"强势系数1":calculate_stock_rating_1_for_stock,"强势系数2":calculate_stock_rating_2_for_stock,"强势系数3":calculate_stock_rating_3_for_stock,"强势系数5":calculate_stock_rating_5_for_stock}
 function_to_sort_by = "强势系数1"
 df_to_display, stocks_out_of_time_range = rank_stocks_by_rating_function(ts_codes,start_time,end_time,ranking_functions,function_to_sort_by,basic_stock_data)
-st.markdown("以强势系数1排序的结果：")
-st.dataframe(df_to_display.sort_values("强势系数1",ascending=False))
-st.markdown("以强势系数2排序的结果：")
-st.dataframe(df_to_display.sort_values("强势系数2",ascending=False))
-st.markdown("以强势系数3排序的结果：")
-st.dataframe(df_to_display.sort_values("强势系数3",ascending=False))
-st.markdown("以强势系数5排序的结果：")
-st.dataframe(df_to_display.sort_values("强势系数5",ascending=False))
+
+col1, col2, col3, col4 = st.columns(4)
+
+
+rating_1_sorted = df_to_display.sort_values("强势系数1",ascending=False)[['股票名字','强势系数1']].reset_index(drop=True)
+rating_1_sorted.columns = ["强势系数1股票","强势系数1数值"]
+
+rating_2_sorted = df_to_display.sort_values("强势系数2",ascending=False)[['股票名字','强势系数2']].reset_index(drop=True)
+rating_2_sorted.columns = ["强势系数2股票","强势系数2数值"]
+
+rating_3_sorted = df_to_display.sort_values("强势系数3",ascending=False)[['股票名字','强势系数3']].reset_index(drop=True)
+rating_3_sorted.columns = ["强势系数3股票","强势系数3数值"]
+
+rating_5_sorted = df_to_display.sort_values("强势系数5",ascending=False)[['股票名字','强势系数5']].reset_index(drop=True)
+rating_5_sorted.columns = ["强势系数5股票","强势系数5数值"]
+
+combined = pd.DataFrame({"强势系数1股票":rating_1_sorted["强势系数1股票"],"强势系数1数值":rating_1_sorted["强势系数1数值"],
+                         "强势系数2股票":rating_2_sorted["强势系数2股票"],"强势系数2数值":rating_2_sorted["强势系数2数值"],
+                         "强势系数3股票":rating_3_sorted["强势系数3股票"],"强势系数3数值":rating_3_sorted["强势系数3数值"],
+                         "强势系数5股票":rating_5_sorted["强势系数5股票"],"强势系数5数值":rating_5_sorted["强势系数5数值"],})
+
+hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
+
+st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
+st.table(combined)
+
 
 if len(stocks_out_of_time_range)>0:
     st.markdown("以下股票因在输入的时间段内缺乏数据，所以没有被放入强势系数的比较中:")
